@@ -110,9 +110,10 @@ def handle_calculate_IK(req):
             wy = (py - d7 * R0_G[1,0]).evalf(subs=s)
             wz = (pz - d7 * R0_G[2,0]).evalf(subs=s)
 
-            # Calculate thetas
+            # Calculate theta1
             theta1 = atan2(wy, wx)
 
+            # Calculate sides of O_2 - O_3 - O_5 triangle
             f = ((((wx**2 + wy**2)**0.5 - a1)**2 + (wz - d1)**2)**0.5).evalf(subs=s)
             g = ((a3**2 + d4**2)**0.5).evalf(subs=s)
             h = a2.evalf(subs=s)
@@ -125,6 +126,7 @@ def handle_calculate_IK(req):
             G2 = atan2(wz - d1, (wx**2 + wy**2)**0.5 - a1)
             G2 = G2.evalf(subs=s)
 
+            # Calculate theta2,3
             theta2 = pi/2 - G1 - G2
             theta3 = -(F - pi/2)
 
@@ -134,13 +136,9 @@ def handle_calculate_IK(req):
             # Evaluate R3_6
             R3_6 = R0_3.T * R0_G
 
-            # Roll
+            # Calculate theta4, 5, 6
             theta4 = atan2(-R3_6[2,0], R3_6[0,0])
-
-            # Pitch
             theta5 = -atan2((R3_6[0,0]**2 + R3_6[2,0]**2)**.5, R3_6[1,0])
-
-            # Yaw
             theta6 = atan2(R3_6[1,1], R3_6[1,2])
 
             # Populate response for the IK request

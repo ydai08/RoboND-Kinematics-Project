@@ -62,18 +62,18 @@ rot_y = Matrix([[cos(-pi/2),    0,      sin(-pi/2),     0],
                 [-sin(-pi/2),   0,      cos(-pi/2),     0],
                 [0,             0,      0,              1]])
 DH_URDF = simplify(rot_z * rot_y)
-print(DH_URDF)
+#print(DH_URDF)
 
 # Transform gripper to URDF coordinates
 T0_G_URDF = simplify(T0_G * DH_URDF)
 T3_6_URDF = simplify(T3_6 * DH_URDF)
 
 # Calculate with values to compare against sim output
-print(T3_6_URDF)
+#print(T3_6_URDF)
 #print(T0_G_URDF.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 #print(T0_6_URDF.evalf(subs={q1: 0, q2: 0.396, q3: 0, q4: 0, q5: 0, q6: 0}))
 
-'''
+
 ###########
 # GRIPPER POSE FROM SIM
 # Direct transform without using DH frames
@@ -101,5 +101,5 @@ id_row = Matrix([0, 0, 0, 1]).T
 
 # Join submatrices of homogenous transform
 T_direct = r_tot.row_join(translate).col_join(id_row)
-print(T_direct.evalf(subs={x:2.374, y:0, z:1.2, roll:0, pitch:.396, yaw:0}))
-'''
+print(T_direct)
+#print(T_direct.evalf(subs={x:2.374, y:0, z:1.2, roll:0, pitch:.396, yaw:0}))
