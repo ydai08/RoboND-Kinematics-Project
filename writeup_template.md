@@ -45,10 +45,10 @@ URDF frame information extracted from the kr210.urdf.xacro file and DH reference
 
 See FK.py lines 9-48 for the generation of individual DH transform matrices.  The generalized homogeneous transform using only gripper pose calculated by FK.py lines 78-104 is the following:
 
-cos(pitch)*cos(yaw) | sin(pitch)*sin(roll)*cos(yaw) - sin(yaw)*cos(roll) | sin(pitch)*cos(roll)*cos(yaw) + sin(roll)*sin(yaw) | x 
-sin(yaw)*cos(pitch) | sin(pitch)*sin(roll)*sin(yaw) + cos(roll)*cos(yaw) | sin(pitch)*sin(yaw)*cos(roll) - sin(roll)*cos(yaw) | y 
--sin(pitch) | sin(roll)*cos(pitch) | cos(pitch)*cos(roll) | z 
-0 | 0 | 0 | 1 
+[cos(pitch)*cos(yaw), sin(pitch)*sin(roll)*cos(yaw) - sin(yaw)*cos(roll), sin(pitch)*cos(roll)*cos(yaw) + sin(roll)*sin(yaw), x],
+[sin(yaw)*cos(pitch), sin(pitch)*sin(roll)*sin(yaw) + cos(roll)*cos(yaw), sin(pitch)*sin(yaw)*cos(roll) - sin(roll)*cos(yaw), y],
+[        -sin(pitch),                               sin(roll)*cos(pitch),                               cos(pitch)*cos(roll), z],
+[                  0,                                                  0,                                                  0, 1]]
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
